@@ -1,0 +1,27 @@
+# -*- mode: python -*-
+[general]
+accounts = qqexmail
+maxsyncaccounts = 1
+pythonfile = ~/.offlineimap.py
+
+[Account qqexmail]
+localrepository = qqexmail-local
+remoterepository = qqexmail-remote
+
+[Repository qqexmail-local]
+type = Maildir
+localfolders = ~/Maildir
+
+[Repository qqexmail-remote]
+type = IMAP
+remotehost = imap.exmail.qq.com
+remoteuser = your@domain.com
+#remotepasseval = get_password_emacs("imap.exmail.qq.com", "993")
+remotepass = yourPasswd
+ssl = true
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+
+# 防止中文目录乱码
+nametrans = lambda foldername: foldername.decode('imap4-utf-7').encode('utf-8')
+maxconnections = 4
+realdelete = true

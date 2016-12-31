@@ -45,6 +45,15 @@ values."
 
      (mu4e :variables
            mu4e-installation-path "/usr/local/Cellar/mu/0.9.18/share/emacs/site-lisp/mu/mu4e"
+           mail-user-agent 'mu4e-user-agent
+           mu4e-get-mail-command "offlineimap"
+           mu4e-update-interval 60
+           mu4e-headers-auto-update t
+           mu4e-maildir       "~/Maildir"   ;; top-level Maildir
+           mu4e-sent-folder   "/Sent Messages"       ;; folder for sent messages
+           mu4e-drafts-folder "/Drafts"     ;; unfinished messages
+           mu4e-trash-folder  "/Deleted Messages"      ;; trashed messages
+           mu4e-refile-folder "/INBOX"   ;; saved messages
            mu4e-enable-notifications t
            mu4e-enable-mode-line t)
 
@@ -73,10 +82,11 @@ values."
      ;; blog
      (markdown :variables markdown-live-preview-engine 'vmd)
 
-     ;; languages
+     ;; programming languages
      lua
      html
      csv
+     python
      javascript
      (typescript :variables
                  typescript-fmt-on-save t
@@ -337,17 +347,17 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (require 'mu4e)
-  (setq mail-user-agent 'mu4e-user-agent
-        mu4e-get-mail-command "offlineimap"
-        mu4e-update-interval 60
-        mu4e-headers-auto-update t
-        mu4e-maildir       "~/Maildir"   ;; top-level Maildir
-        mu4e-sent-folder   "/Sent Messages"       ;; folder for sent messages
-        mu4e-drafts-folder "/Drafts"     ;; unfinished messages
-        mu4e-trash-folder  "/Deleted Messages"      ;; trashed messages
-        mu4e-refile-folder "/INBOX"   ;; saved messages
-        )
+;;  (require 'mu4e)
+;;  (setq mail-user-agent 'mu4e-user-agent
+;;        mu4e-get-mail-command "offlineimap"
+;;        mu4e-update-interval 60
+;;        mu4e-headers-auto-update t
+;;        mu4e-maildir       "~/Maildir"   ;; top-level Maildir
+;;        mu4e-sent-folder   "/Sent Messages"       ;; folder for sent messages
+;;        mu4e-drafts-folder "/Drafts"     ;; unfinished messages
+;;        mu4e-trash-folder  "/Deleted Messages"      ;; trashed messages
+;;        mu4e-refile-folder "/INBOX"   ;; saved messages
+;;        )
 
   )
 

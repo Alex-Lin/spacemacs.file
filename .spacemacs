@@ -17,7 +17,7 @@ values."
    ;; not listed in variable `dotspacemacs-configuration-layers'), `all' will
    ;; lazy install any layer that support lazy installation even the layers
    ;; listed in `dotspacemacs-configuration-layers'. `nil' disable the lazy
-   ;; installation feature and you have to explicitly list a alayer in the
+   ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
    dotspacemacs-enable-lazy-installation 'unused
@@ -46,6 +46,9 @@ values."
      (mu4e :variables
            mu4e-installation-path "/usr/local/Cellar/mu/0.9.18/share/emacs/site-lisp/mu/mu4e"
            mail-user-agent 'mu4e-user-agent
+           smtpmail-smtp-server "smtp.exmail.qq.com"
+           smtpmail-smtp-service 587
+           smtpmail-smtp-user "your@email.com"
            mu4e-get-mail-command "offlineimap"
            mu4e-update-interval 60
            mu4e-headers-auto-update t
@@ -55,7 +58,12 @@ values."
            mu4e-trash-folder  "/Deleted Messages"      ;; trashed messages
            mu4e-refile-folder "/INBOX"   ;; saved messages
            mu4e-enable-notifications t
-           mu4e-enable-mode-line t)
+           mu4e-enable-mode-line t
+           mu4e-user-mail-address-list '("your@email.com")
+           mu4e-reply-to-address "your@email.com"
+           user-mail-address "your@email.com"
+           user-full-name  "yourName"
+           )
 
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t
@@ -347,18 +355,19 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-;;  (require 'mu4e)
-;;  (setq mail-user-agent 'mu4e-user-agent
-;;        mu4e-get-mail-command "offlineimap"
-;;        mu4e-update-interval 60
-;;        mu4e-headers-auto-update t
-;;        mu4e-maildir       "~/Maildir"   ;; top-level Maildir
-;;        mu4e-sent-folder   "/Sent Messages"       ;; folder for sent messages
-;;        mu4e-drafts-folder "/Drafts"     ;; unfinished messages
-;;        mu4e-trash-folder  "/Deleted Messages"      ;; trashed messages
-;;        mu4e-refile-folder "/INBOX"   ;; saved messages
-;;        )
-
+  ;; read password from gpg file
+  ;;
+  ;; how to generate gpg file
+  ;; 1. brew install gnupg --with-libusb-compat
+  ;; 2. generate your pub/sub keys & set your key's protect password
+  ;; 3. edit file in scratch buffer
+  ;; 4. save to ~/.authinfo.gpg , use your protect password to encrypt
+  ;;
+  (defun offlineimap-get-password (host port)
+    (require 'netrc)
+    (let* ((netrc (netrc-parse (expand-file-name "~/.authinfo.gpg")))
+           (hostentry (netrc-machine netrc host port port)))
+      (when hostentry (netrc-get hostentry "password"))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

@@ -16,8 +16,7 @@ localfolders = ~/Maildir
 type = IMAP
 remotehost = imap.exmail.qq.com
 remoteuser = your@domain.com
-#remotepasseval = get_password_emacs("imap.exmail.qq.com", "993")
-remotepass = yourPasswd
+remotepasseval = get_password_emacs("imap.exmail.qq.com", "993")
 ssl = true
 sslcacertfile = /usr/local/etc/openssl/cert.pem
 
